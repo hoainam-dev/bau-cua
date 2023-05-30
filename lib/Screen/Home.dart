@@ -57,15 +57,16 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  TextEditingController _betController = new TextEditingController();//coins bet ipnut
-  double _betAmountTotal = 0;//coins bet total
-  double _totalCoins = 100;//coins total
+  TextEditingController _betController =
+      new TextEditingController(); //coins bet ipnut
+  double _betAmountTotal = 0; //coins bet total
+  double _totalCoins = 100; //coins total
 
   //recursive function to random according to the rule
-  int _randomRecursion(int randomNum){
-    if (randomNum>5) //recursive exit condition
-        {
-      randomNum = randomNum-6;
+  int _randomRecursion(int randomNum) {
+    if (randomNum > 5) //recursive exit condition
+    {
+      randomNum = randomNum - 6;
       return _randomRecursion(randomNum);
     }
     return randomNum;
@@ -74,7 +75,7 @@ class _HomeState extends State<Home> {
   void _roll() {
     setState(() {
       //set index for dice3 by rule
-      _randomIndex3 = _randomIndex1+_randomIndex2+_randomIndex3+1;
+      _randomIndex3 = _randomIndex1 + _randomIndex2 + _randomIndex3 + 1;
       _randomRecursion(_randomIndex3);
       _randomItem3 = mapItems.keys.toList()[_randomRecursion(_randomIndex3)];
 
@@ -104,14 +105,7 @@ class _HomeState extends State<Home> {
       //set map to default
       _mapBet.clear();
       _betAmountTotal = 0;
-      mapItems = {
-        'nai': 0,
-        'bau': 0,
-        'ga': 0,
-        'ca': 0,
-        'cua': 0,
-        'tom': 0
-      };
+      mapItems = {'nai': 0, 'bau': 0, 'ga': 0, 'ca': 0, 'cua': 0, 'tom': 0};
     });
   }
 
@@ -142,7 +136,7 @@ class _HomeState extends State<Home> {
                     final String _bet = _betController.text;
                     if (_bet != null && double.parse(_bet) <= _totalCoins) {
                       double coinsBet = 0;
-                      if(_mapBet[item]!=null){
+                      if (_mapBet[item] != null) {
                         coinsBet = _mapBet[item]!;
                       }
                       _mapBet[item] = double.parse(_bet) + coinsBet;
@@ -190,105 +184,77 @@ class _HomeState extends State<Home> {
         ),
         body: SingleChildScrollView(
             child: Column(
-              children: <Widget>[
-                const SizedBox(height: 10),
-                StreamBuilder<User?>( //check haven been login
-                    stream: FirebaseAuth.instance.authStateChanges(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Text(" Wellcome ${user!.email}", style: const TextStyle(fontSize: 16));
-                      } else
-                        return Text("");
-                    }),
-                const SizedBox(height: 10),
-                Text("Số dư: ${_totalCoins}"),
-                const SizedBox(height: 20),
-                StreamBuilder<User?>( //check haven been login
-                    stream: FirebaseAuth.instance.authStateChanges(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Container(
-                            height: 300,
-                            width: MediaQuery.of(context).size.width,
-                            child: GridView.count(
-                                crossAxisCount: 3,
-                                children: List.generate(mapItems.length, (index) {
-                                  return Center(
-                                      child: Container(
-                                          child: ConstrainedBox(
-                                              constraints: const BoxConstraints.expand(),
-                                              child: FlatButton(
-                                                onPressed: () {
-                                                  bet(mapItems.keys.toList()[index]);
-                                                },
-                                                child: Column(
-                                                  children: [
-                                                    Image.asset(
-                                                        'assets/img/${mapItems.keys.toList()[index]}.png',
-                                                        height: 110,
-                                                        width: 110),
-                                                    Text(
-                                                        "${mapItems.values.toList()[index]}")
-                                                  ],
-                                                ),
-                                              ))));
-                                })));
-                      } else
-                        return Container(
-                            height: 300,
-                            width: MediaQuery.of(context).size.width,
-                            child: GridView.count(
-                                crossAxisCount: 3,
-                                children: List.generate(mapItems.length, (index) {
-                                  return Center(
-                                      child: Container(
-                                          child: ConstrainedBox(
-                                              constraints: const BoxConstraints.expand(),
-                                              child: FlatButton(
-                                                onPressed: () {
-                                                  Navigator.push(context,
-                                                      MaterialPageRoute(builder: (context) =>
-                                                          LoginWithGoogle()));
-                                                },
-                                                child: Column(
-                                                  children: [
-                                                    Image.asset(
-                                                        'assets/img/${mapItems.keys.toList()[index]}.png',
-                                                        height: 110,
-                                                        width: 110),
-                                                    Text(
-                                                        "${mapItems.values.toList()[index]}")
-                                                  ],
-                                                ),
-                                              ))));
-                                })));
-                    }),
-                Text("Tổng tiền cược: ${_betAmountTotal}", style: TextStyle(fontSize: 16)),
-                SizedBox(height: 10),
-                const Text("Kết quả lắc", style: TextStyle(fontSize: 16)),
-                SizedBox(height: 10),
-                randomList.length>0?
-                Container(
+          children: <Widget>[
+            const SizedBox(height: 10),
+            StreamBuilder<User?>(
+                //check haven been login
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(" Wellcome ${user!.email}",
+                        style: const TextStyle(fontSize: 16));
+                  } else
+                    return Text("");
+                }),
+            const SizedBox(height: 10),
+            Text("Số dư: ${_totalCoins}"),
+            const SizedBox(height: 20),
+            Container(
+                height: 300,
+                width: MediaQuery.of(context).size.width,
+                child: GridView.count(
+                    crossAxisCount: 3,
+                    children: List.generate(mapItems.length, (index) {
+                      return Center(
+                          child: Container(
+                              child: ConstrainedBox(
+                                  constraints: const BoxConstraints.expand(),
+                                  child: FlatButton(
+                                    onPressed: () {
+                                      bet(mapItems.keys.toList()[index]);
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                            'assets/img/${mapItems.keys.toList()[index]}.png',
+                                            height: 110,
+                                            width: 110),
+                                        Text(
+                                            "${mapItems.values.toList()[index]}")
+                                      ],
+                                    ),
+                                  ))));
+                    }))),
+            Text("Tổng tiền cược: ${_betAmountTotal}",
+                style: TextStyle(fontSize: 16)),
+            SizedBox(height: 10),
+            const Text("Kết quả lắc", style: TextStyle(fontSize: 16)),
+            SizedBox(height: 10),
+            randomList.length > 0
+                ? Container(
                     height: 150,
                     width: MediaQuery.of(context).size.width,
                     child: GridView.count(
                         crossAxisCount: 3,
                         children: List.generate(randomList.length, (index) {
-                          return Image.asset('assets/img/${randomList[index]}.png',
-                              height: 90, width: 90);
-                        }))):Container(),
-                Container(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      children: [
-                        ElevatedButton(
-                          onPressed: _roll,
-                          child: const Text('Lắc'),
-                        ),
-                      ],
-                    )),
-              ],
-            )));
+                          return Image.asset(
+                              'assets/img/${randomList[index]}.png',
+                              height: 90,
+                              width: 90);
+                        })))
+                : Container(),
+            Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: _roll,
+                      child: const Text('Lắc'),
+                    ),
+                  ],
+                )),
+          ],
+        )));
   }
 }
