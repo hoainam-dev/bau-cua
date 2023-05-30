@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "420846369911",
+    "project_id": "bau-cua-1",
+    "storage_bucket": "bau-cua-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420846369911:android:8b578ffa9e306f08da9a72",
+        "android_client_info": {
+          "package_name": "com.example.baucua"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmM9MCwFUIOr5sxHxM4Pb5ja2cQR7q5oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
