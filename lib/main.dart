@@ -1,4 +1,3 @@
-import 'package:baucua/Screen/BauCuaScreen.dart';
 import 'package:baucua/Screen/Home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
