@@ -209,7 +209,7 @@ class _HomeState extends State<Home> {
                           child: Container(
                               child: ConstrainedBox(
                                   constraints: const BoxConstraints.expand(),
-                                  child: FlatButton(
+                                  child: TextButton(
                                     onPressed: () {
                                       bet(mapItems.keys.toList()[index]);
                                     },
@@ -217,7 +217,7 @@ class _HomeState extends State<Home> {
                                       children: [
                                         Image.asset(
                                             'assets/img/${mapItems.keys.toList()[index]}.png',
-                                            height: 110,
+                                            height: 90,
                                             width: 110),
                                         Text(
                                             "${mapItems.values.toList()[index]}")
